@@ -5,10 +5,11 @@ import "../estilos/formulario.css"
 
 
 function Form({ estado1, estado2, estado3, estado4 }) {
+
     const validar = (palabra) => {
         if (palabra <= 3 && palabra >= 30) {
             estado1 = true
-            console.log(pala)
+            console.log(palabra)
         }
 
     }
