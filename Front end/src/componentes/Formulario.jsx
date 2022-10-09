@@ -1,33 +1,48 @@
 import React from "react";
 //import { FormularioEstilos } from "../elementos/FormularioEstilos";
 import "../estilos/formulario.css"
+import { useState } from 'react'
 
 
 
-function Form({ estado1, estado2, estado3, estado4 }) {
+function Form() {
+    const [nombre,setNombre]= useState({valor:'', estado:false})
+    const [descripcion,setDescripcion]= useState({valor:'', estado:false})
+    const [producto,setProducto]= useState({valor:'', estado:false})
+    const [archivo,setArchivo]= useState({valor:'', estado:false})
 
-    const validar = (palabra) => {
-        if (palabra <= 3 && palabra >= 30) {
-            estado1 = true
-            console.log(palabra)
-        }
+    const estadoNombre=(palabra)=>{
+       setNombre(prevState=>({...prevState, valor:palabra}))
+       if(nombre.valor.length<3||nombre.valor.length>30){
+        setNombre(prevState=>({...prevState, estado:true}))
+       }
+       else{setNombre(prevState=>({...prevState, estado:false}))}   
+    }
+
+    const estadoDescripcion=(palabra)=>{
+        setDescripcion(prevState=>({...prevState, valor:palabra}))
+        if(descripcion.valor.length<10||descripcion.valor.length>100){
+            setDescripcion(prevState=>({...prevState, estado:true}))
+           }
+           else{setDescripcion(prevState=>({...prevState, estado:false}))}  
 
     }
     return <div className="contenedor">
+
         <div className="elementos-form">
             <label className="label">
                 Nombre del producto
             </label>
-            <input className="entrada" placeholder="Ingrese el nombre" onChange={ev => console.log(ev.target.value)}></input>
-            <h3 className={estado1 ? "validacion" : "invisible"}>
-                El nombre debe contener de 2 a 30 caracteres
+            <input className="entrada" placeholder="Ingrese el nombre"onChange={ev=> estadoNombre(ev.target.value)}></input>
+            <h3 className={nombre.estado?"validacion":"invisible"} >
+             El nombre debe contener de 2 a 30 caracteres
             </h3>
             <label className="label">
                 Descripción del producto
             </label>
-            <input className="entrada" placeholder="Ingrese la descripción"></input>
-            <h3 className={estado2 ? "validacion" : "invisible"}>
-                La descripción debe contener de 10 a 100 caracteres
+            <input className="entrada" placeholder="Ingrese la descripción" onChange={ev=> estadoDescripcion(ev.target.value)}></input>
+            <h3 className={descripcion.estado?"validacion":"invisible"}>
+             La descripción debe contener de 10 a 100 caracteres
             </h3>
             <label className="label">
                 Tipo de producto
@@ -46,20 +61,20 @@ function Form({ estado1, estado2, estado3, estado4 }) {
                 <option value="postres">Postres</option>
                 <option value="snacks">Snacks</option>
             </select>
-            <h3 className={estado3 ? "validacion" : "invisible"}>
-                Se debe seleccionar una opción
+            <h3 className={producto.estado?"validacion":"invisible"}>
+             Se debe seleccionar una opción
             </h3>
             <label className="label">
                 Insertar imagen
             </label>
-
-            <button className="botonA">
-                Seleccionar archivo
-            </button>
-            <h3 className={estado4 ? "validacion" : "invisible"}>
-                Se debe seleccionar un archivo
+            
+                <button className="botonA">
+                    Seleccionar archivo
+                </button>
+            <h3 className={archivo.estado?"validacion":"invisible"}>
+             Se debe seleccionar un archivo
             </h3>
-
+            
 
             <button className="botonR">
                 Registrar
@@ -74,19 +89,5 @@ function Form({ estado1, estado2, estado3, estado4 }) {
 
 
 }
-/*const Formulario = () => {
-    return (
-        
-        <main>
-            <Formulario action="">
 
-                <div>
-                    <label htmlFor="">Usuario</label>
-                    <input> type="text" placeholder="usuario"</input>
-                    <p>Lorem</p> 
-                </div>
-            </Formulario>
-        </main>
-    )
-}*/
 export default Form;
