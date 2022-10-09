@@ -4,23 +4,29 @@ import "../estilos/formulario.css"
 
 
 
-function Form({estado1, estado2, estado3, estado4}) {
-    return <div className="contenedor">
+function Form({ estado1, estado2, estado3, estado4 }) {
+    const validar = (palabra) => {
+        if (palabra <= 3 && palabra >= 30) {
+            estado1 = true
+            console.log(pala)
+        }
 
+    }
+    return <div className="contenedor">
         <div className="elementos-form">
             <label className="label">
                 Nombre del producto
             </label>
-            <input className="entrada" placeholder="Ingrese el nombre"></input>
-            <h3 className={estado1?"validacion":"invisible"}>
-             El nombre debe contener de 2 a 30 caracteres
+            <input className="entrada" placeholder="Ingrese el nombre" onChange={ev => console.log(ev.target.value)}></input>
+            <h3 className={estado1 ? "validacion" : "invisible"}>
+                El nombre debe contener de 2 a 30 caracteres
             </h3>
             <label className="label">
                 Descripción del producto
             </label>
             <input className="entrada" placeholder="Ingrese la descripción"></input>
-            <h3 className={estado2?"validacion":"invisible"}>
-             La descripción debe contener de 10 a 100 caracteres
+            <h3 className={estado2 ? "validacion" : "invisible"}>
+                La descripción debe contener de 10 a 100 caracteres
             </h3>
             <label className="label">
                 Tipo de producto
@@ -39,20 +45,20 @@ function Form({estado1, estado2, estado3, estado4}) {
                 <option value="postres">Postres</option>
                 <option value="snacks">Snacks</option>
             </select>
-            <h3 className={estado3?"validacion":"invisible"}>
-             Se debe seleccionar una opción
+            <h3 className={estado3 ? "validacion" : "invisible"}>
+                Se debe seleccionar una opción
             </h3>
             <label className="label">
                 Insertar imagen
             </label>
-            
-                <button className="botonA">
-                    Seleccionar archivo
-                </button>
-            <h3 className={estado4?"validacion":"invisible"}>
-             Se debe seleccionar un archivo
+
+            <button className="botonA">
+                Seleccionar archivo
+            </button>
+            <h3 className={estado4 ? "validacion" : "invisible"}>
+                Se debe seleccionar un archivo
             </h3>
-            
+
 
             <button className="botonR">
                 Registrar
