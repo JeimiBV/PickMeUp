@@ -5,8 +5,10 @@
 .contenedor-modals{
     min-width: 30vw;
     min-height: 30vh;
-    background-color: aqua;
+    background-color: gray;
     color: aliceblue;
+    border: 2px solid black;
+    border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;

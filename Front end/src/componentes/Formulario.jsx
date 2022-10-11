@@ -13,6 +13,7 @@ function Form() {
     const [producto,setProducto]= useState({valor:'', estado:false})
     const [archivo,setArchivo]= useState({valor:'', estado:false})
 
+
     const validacion=()=>{
         
         if(nombre.valor.length<2||nombre.valor.length>30){
@@ -30,12 +31,31 @@ function Form() {
         
 
     }
+/*
+    var modalConf = document.getElementsById("myModal");
+    
+    reg.onClick = function(){
+        modalConf.style.display = "flex"
+    }
 
+    window.onClick = function(event){
+        if (event.target == modalConf) {
+            modalConf.style.display = "none"
+        }
+    }*/
 
     return <div className="contenedor">
-                      <Modals className="modal"
-          texto={"hola mundo"}/>
-          
+        <span className="modals" id="myModal">
+         <h2>
+            Registro de producto
+         </h2>
+         <h3 className="texto-confirmacion">esta seguro de registrar el producto?</h3>
+         <div className="botones">
+            <button className="left">Si</button>
+            <button className="right">No</button>
+         </div>
+        </span>
+         
         <div className="elementos-form">
             <label className="label">
                 Nombre del producto
@@ -80,7 +100,7 @@ function Form() {
 
 
 
-            <button className="botonR" type="file" onClick={()=>{validacion()}}>
+            <button className="botonR" id="br" type="file" onClick={()=>{validacion()}}>
                 Registrar
             </button>
 
@@ -90,6 +110,7 @@ function Form() {
 
 
     </div>
+
 
 
 }
