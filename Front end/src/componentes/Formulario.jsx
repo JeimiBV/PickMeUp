@@ -12,9 +12,11 @@ function Form() {
     const [descripcion,setDescripcion]= useState({valor:'', estado:false})
     const [producto,setProducto]= useState({valor:'', estado:false})
     const [archivo,setArchivo]= useState({valor:'', estado:false})
+    const [visible, setVisible]=useState(true)
 
 
     const validacion=()=>{
+        handleShow()
         
         if(nombre.valor.length<2||nombre.valor.length>30){
             setNombre(prevState=>({...prevState, estado:true}))
@@ -26,35 +28,12 @@ function Form() {
         }
         else{setDescripcion(prevState=>({...prevState, estado:false}))} 
 
-        
-        
-        
-
-    }
-/*
-    var modalConf = document.getElementsById("myModal");
-    
-    reg.onClick = function(){
-        modalConf.style.display = "flex"
     }
 
-    window.onClick = function(event){
-        if (event.target == modalConf) {
-            modalConf.style.display = "none"
-        }
-    }*/
+    const handleShow=()=>setVisible(!visible)
 
     return <div className="contenedor">
-        <span className="modals" id="myModal">
-         <h2>
-            Registro de producto
-         </h2>
-         <h3 className="texto-confirmacion">esta seguro de registrar el producto?</h3>
-         <div className="botones">
-            <button className="left">Si</button>
-            <button className="right">No</button>
-         </div>
-        </span>
+
          
         <div className="elementos-form">
             <label className="label">
@@ -100,11 +79,22 @@ function Form() {
 
 
 
-            <button className="botonR" id="br" type="file" onClick={()=>{validacion()}}>
+            <button className="botonR"   onClick={validacion}>
                 Registrar
             </button>
 
         </div>
+
+        <span className={visible?"modals" : "transparent"}id="myModal">
+         <h2>
+            Registro de producto
+         </h2>
+         <h3 className="texto-confirmacion">esta seguro de registrar el producto?</h3>
+         <div className="botones">
+            <button className="left">Si</button>
+            <button className="right">No</button>
+         </div>
+        </span>
 
 
 
