@@ -15,11 +15,7 @@ function App() {
       <div className='contenedor-form'>
         <Menu />
         <Form
-        /*  estado1={valido.estado1}
-          estado2={valido.estado2}
-          estado3={valido.estado3}
-          estado4={valido.estado4}
-        *//>
+        />
       </div>
     </div>
   )

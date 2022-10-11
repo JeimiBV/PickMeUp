@@ -1,0 +1,14 @@
+*{
+    padding: 0%;
+    margin: 0%;
+}
+.contenedor-modals{
+    min-width: 30vw;
+    min-height: 30vh;
+    background-color: aqua;
+    color: aliceblue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+}
