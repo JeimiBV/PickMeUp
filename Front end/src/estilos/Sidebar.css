@@ -4,7 +4,7 @@
 
 }
 
-.Menu {
+.Sidebar {
   height:89.5vh;
   width: 20%;
   background-color: rgb(47, 62, 70);
@@ -13,12 +13,12 @@
   font-size: medium;
 }
 
-.listaMenu {
+.listaSidebar {
   height: auto;
   width: 100%;
 }
 
-.listaMenu .row {
+.listaSidebar .row {
   width: 100%;
   height: 8vh;
   border: 1px solid rgb(47, 62, 70);
@@ -30,13 +30,13 @@
 
 }
 
-.listaMenu .row:hover {
+.listaSidebar .row:hover {
   cursor: pointer;
   background-color: rgb(132, 169, 140);
   font-style: bold;
 }
 
-.listaMenu #active {
+.listaSidebar #active {
   background-color: rgb(132, 169, 140);
   font-weight: bold;
 }
