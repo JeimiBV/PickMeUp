@@ -15,22 +15,26 @@ function Form() {
     const [modalNo, setModalNo] = useState(false)
     const [data, setData] = useState();
     const opciones = ["Alimentos enlatados", "Bebidas calientes", "Carnes y pescado", "Cereales", "Ensalada", "Frutas y verduras", "Lácteos y huevos", "Panadería y pastelería", "Postres", "Snacks"];
-    const [producto, setProducto] = useState({valor: 'seleccione el tipo', estado: false });
+    const [producto, setProducto] = useState({ valor: 'seleccione el tipo', estado: false });
 
     const validacion = () => {
-        
         if ((nombre.valor.length >= 2 && nombre.valor.length <= 30) && (descripcion.valor.length >= 10 && descripcion.valor.length <= 100) && (producto.valor !== "seleccione el tipo")) {
-            setNombre((prevState) => ({ ...prevState, estado: false }))
-            setDescripcion((prevState) => ({ ...prevState, estado: false }))
             setModalConf(true);
-            setProducto((prevState) => ({ ...prevState, estado: false }))
+        } else {
+            if ((nombre.valor.length >= 2 && nombre.valor.length <= 30)) {
+                setNombre((prevState) => ({ ...prevState, estado: false }));
+            } else {
+                setNombre(prevState => ({ ...prevState, estado: true }))
+            } if ((descripcion.valor.length >= 10 && descripcion.valor.length <= 100)) {
+                setDescripcion((prevState) => ({ ...prevState, estado: false }))
+            } else {
+                setDescripcion(prevState => ({ ...prevState, estado: true }))
+            } if ((producto.valor !== "seleccione el tipo")) {
+                setProducto((prevState) => ({ ...prevState, estado: false }))
+            } else {
+                setProducto((prevState) => ({ ...prevState, estado: true }))
+            }
         }
-        else {
-            setNombre(prevState => ({ ...prevState, estado: true }))
-            setDescripcion(prevState => ({ ...prevState, estado: true }))
-            setProducto((prevState) => ({ ...prevState, estado: true }))
-        }
-
     }
 
     const mostrarSi = () => {
@@ -76,7 +80,7 @@ function Form() {
             </label>
             <select className="drop" placeholder="Seleccione el tipo"
                 defaultValue="seleccione el tipo"
-                onChange={ 
+                onChange={
                     e => setProducto(prevState => ({ ...prevState, valor: e.target.value }))}>
                 <option value="seleccione el tipo" disabled hidden>Seleccione el tipo</option>
                 {opciones.map((value) => (
