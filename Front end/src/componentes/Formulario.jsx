@@ -15,19 +15,17 @@ function Form() {
     const [modalNo, setModalNo] = useState(false)
     const [data, setData] = useState();
     const opciones = ["Alimentos enlatados", "Bebidas calientes", "Carnes y pescado", "Cereales", "Ensalada", "Frutas y verduras", "Lácteos y huevos", "Panadería y pastelería", "Postres", "Snacks"];
-    const [producto, setProducto] = useState(opciones[0], { estado: false });
+    const [producto, setProducto] = useState({valor: 'seleccione el tipo', estado: false });
 
     const validacion = () => {
         
-        if ((nombre.valor.length >= 2 && nombre.valor.length <= 30) && (descripcion.valor.length >= 10 && descripcion.valor.length <= 100) && (producto !== "Seleccione el tipo")) {
-            console.log(producto);
+        if ((nombre.valor.length >= 2 && nombre.valor.length <= 30) && (descripcion.valor.length >= 10 && descripcion.valor.length <= 100) && (producto.valor !== "seleccione el tipo")) {
             setNombre((prevState) => ({ ...prevState, estado: false }))
             setDescripcion((prevState) => ({ ...prevState, estado: false }))
             setModalConf(true);
             setProducto((prevState) => ({ ...prevState, estado: false }))
         }
         else {
-            console.log(producto);
             setNombre(prevState => ({ ...prevState, estado: true }))
             setDescripcion(prevState => ({ ...prevState, estado: true }))
             setProducto((prevState) => ({ ...prevState, estado: true }))
@@ -77,9 +75,10 @@ function Form() {
                 Tipo de producto
             </label>
             <select className="drop" placeholder="Seleccione el tipo"
-                defaultValue="Seleccione el tipo"
-                onChange={e => setProducto(e.target.value)}>
-                <option value="Seleccione el tipo" disabled hidden>Seleccione el tipo</option>
+                defaultValue="seleccione el tipo"
+                onChange={ 
+                    e => setProducto(prevState => ({ ...prevState, valor: e.target.value }))}>
+                <option value="seleccione el tipo" disabled hidden>Seleccione el tipo</option>
                 {opciones.map((value) => (
                     <option value={value} key={value}>
                         {value}
