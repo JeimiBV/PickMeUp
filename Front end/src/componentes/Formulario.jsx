@@ -14,7 +14,7 @@ function Form() {
     const [modalConf, setModalConf] = useState(false)
     const [modalSi, setModalSi] = useState(false)
     const [modalNo, setModalNo] = useState(false)
-
+    const [data,setData]=useState();
 
 
     const validacion = () => {
@@ -90,10 +90,11 @@ function Form() {
             <h3 className={producto.estado ? "validacion" : "invisible"}>
                 Se debe seleccionar una opción
             </h3>
-            <label className="label">
+            <label htmlFor="img">
                 Insertar imagen
             </label>
-            <input type="file" className="botonA" />
+            
+            <input id="img" type="file" className="botonA"  accept="image/png, image/jpeg, image/jpg" onChange={(e)=>setData(e.target.files)} />
 
             <button className="botonR" onClick={validacion}>
                 Registrar
