@@ -73,7 +73,7 @@ function Form() {
                 Tipo de producto
             </label>
             <select className="drop" placeholder="Seleccione el tipo">
-                <option defaultValue={"seleccione el tipo"}>Seleccione el tipo</option>
+                <option value="" selected disabled hidden>Seleccione el tipo</option>
                 <option value="alimentosEnlatados">Alimentos enlatados</option>
                 <option value="bebidasCalientes">Bebidas calientes</option>
                 <option value="bebidasFrías">Bebidas frías</option>
