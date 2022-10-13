@@ -44,7 +44,7 @@
     margin: 5% auto;
     background-color: gray;
     transition: .5s;
-
+    cursor: pointer;
 }
 .botonR:hover{
     background-color: darkslategray;
@@ -93,6 +93,7 @@
     flex-direction: column;
     border-radius: 20px;
     color: white;
+    
 }
 .botones{
     width: 100%;
