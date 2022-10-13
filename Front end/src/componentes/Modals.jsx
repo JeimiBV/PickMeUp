@@ -3,7 +3,6 @@ import "../estilos/Modals.css"
 
 
 function Modals({ children, estado, cambiarEstado }) {
-    console.log(estado);
     return (
         <>
             {estado &&

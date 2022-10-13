@@ -121,3 +121,17 @@
 .transparent{
     display: none;
 }
+.modalSiNo{
+    padding-top: .3vh;
+    border: 0ch;
+    position: absolute;
+    background-color: darkslategray;
+    min-width: 20vw;
+    min-height: 25vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 20px;
+    color: white;
+}

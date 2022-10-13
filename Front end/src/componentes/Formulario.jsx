@@ -11,7 +11,9 @@ function Form() {
     const [descripcion, setDescripcion] = useState({ valor: '', estado: false })
     const [producto, setProducto] = useState({ valor: '', estado: false })
     const [archivo, setArchivo] = useState({ valor: '', estado: false })
-    const [visible, setVisible] = useState(false)
+    const [modalConf, setModalConf] = useState(false)
+    const [modalSi, setModalSi] = useState(false)
+    const [modalNo, setModalNo] = useState(false)
 
 
 
@@ -20,7 +22,7 @@ function Form() {
         if ((nombre.valor.length >= 2 && nombre.valor.length <= 30) && (descripcion.valor.length >= 10 && descripcion.valor.length <= 100)) {
             setNombre((prevState) => ({ ...prevState, estado: false }))
             setDescripcion((prevState) => ({ ...prevState, estado: false }))
-            setVisible(true);
+            setModalConf(true);
         }
         else {
             setNombre(prevState => ({ ...prevState, estado: true }))
@@ -28,6 +30,24 @@ function Form() {
         }
 
     }
+
+    const mostrarSi = () => {
+        setTimeout(() => {
+            setModalNo(false)
+            setModalSi(false)
+        }, 3000);
+        setModalConf(false);
+        setModalSi(true);
+    }
+    const mostrarNo = () => {
+        setTimeout(() => {
+            setModalNo(false)
+            setModalSi(false)
+        }, 3000);
+        setModalConf(false);
+        setModalNo(true);
+    }
+    
 
 
     return <div className="contenedor">
@@ -83,8 +103,8 @@ function Form() {
 
         </div>
         <Modals
-            estado={visible}
-            cambiarEstado={setVisible}
+            estado={modalConf}
+            cambiarEstado={setModalConf}
         >
             <div className="modals">
                 <h2>
@@ -92,11 +112,31 @@ function Form() {
                 </h2>
                 <h3 className="texto-confirmacion">¿Está seguro de registrar el producto?</h3>
                 <div className="botones">
-                    <button className="left">Si</button>
-                    <button className="right">No</button>
+                    <button className="left" onClick={mostrarSi}>Si</button>
+                    <button className="right" onClick={mostrarNo}>No</button>
                 </div>
             </div>
         </Modals>
+
+        <Modals
+            estado={modalSi}
+            cambiarEstado={setModalSi}
+        >
+            <div className="modalSiNo">
+                <h3 className="texto-confirmacion">Guardando registro ...</h3>
+            </div>
+        </Modals>
+
+        <Modals
+            estado={modalNo}
+            cambiarEstado={setModalNo}
+        >
+            <div className="modalSiNo">
+                <h3 className="texto-confirmacion">Cancelado</h3>
+            </div>
+        </Modals>
+
+
     </div>
     
 }
