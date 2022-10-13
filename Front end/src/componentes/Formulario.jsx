@@ -9,24 +9,28 @@ function Form() {
 
     const [nombre, setNombre] = useState({ valor: '', estado: false })
     const [descripcion, setDescripcion] = useState({ valor: '', estado: false })
-    const [producto, setProducto] = useState({ valor: '', estado: false })
     const [archivo, setArchivo] = useState({ valor: '', estado: false })
     const [modalConf, setModalConf] = useState(false)
     const [modalSi, setModalSi] = useState(false)
     const [modalNo, setModalNo] = useState(false)
-    const [data,setData]=useState();
-
+    const [data, setData] = useState();
+    const opciones = ["Alimentos enlatados", "Bebidas calientes", "Carnes y pescado", "Cereales", "Ensalada", "Frutas y verduras", "Lácteos y huevos", "Panadería y pastelería", "Postres", "Snacks"];
+    const [producto, setProducto] = useState(opciones[0], { estado: false });
 
     const validacion = () => {
-
-        if ((nombre.valor.length >= 2 && nombre.valor.length <= 30) && (descripcion.valor.length >= 10 && descripcion.valor.length <= 100)) {
+        
+        if ((nombre.valor.length >= 2 && nombre.valor.length <= 30) && (descripcion.valor.length >= 10 && descripcion.valor.length <= 100) && (producto !== "Seleccione el tipo")) {
+            console.log(producto);
             setNombre((prevState) => ({ ...prevState, estado: false }))
             setDescripcion((prevState) => ({ ...prevState, estado: false }))
             setModalConf(true);
+            setProducto((prevState) => ({ ...prevState, estado: false }))
         }
         else {
+            console.log(producto);
             setNombre(prevState => ({ ...prevState, estado: true }))
             setDescripcion(prevState => ({ ...prevState, estado: true }))
+            setProducto((prevState) => ({ ...prevState, estado: true }))
         }
 
     }
@@ -47,7 +51,7 @@ function Form() {
         setModalConf(false);
         setModalNo(true);
     }
-    
+
 
 
     return <div className="contenedor">
@@ -72,20 +76,15 @@ function Form() {
             <label className="label">
                 Tipo de producto
             </label>
-            <select className="drop" placeholder="Seleccione el tipo">
-                <option value="" selected disabled hidden>Seleccione el tipo</option>
-                <option value="alimentosEnlatados">Alimentos enlatados</option>
-                <option value="bebidasCalientes">Bebidas calientes</option>
-                <option value="bebidasFrías">Bebidas frías</option>
-                <option value="carnesPescado">Carnes y pescado</option>
-                <option value="cereales">Cereales</option>
-                <option value="comida">Comida</option>
-                <option value="ensalada">Ensalada</option>
-                <option value="frutasVerduras">Frutas y verduras</option>
-                <option value="lácteosHuevos">Lácteos y huevos</option>
-                <option value="panaderíaPastelería">Panadería y pastelería</option>
-                <option value="postres">Postres</option>
-                <option value="snacks">Snacks</option>
+            <select className="drop" placeholder="Seleccione el tipo"
+                defaultValue="Seleccione el tipo"
+                onChange={e => setProducto(e.target.value)}>
+                <option value="Seleccione el tipo" disabled hidden>Seleccione el tipo</option>
+                {opciones.map((value) => (
+                    <option value={value} key={value}>
+                        {value}
+                    </option>
+                ))}
             </select>
             <h3 className={producto.estado ? "validacion" : "invisible"}>
                 Se debe seleccionar una opción
@@ -93,8 +92,8 @@ function Form() {
             <label htmlFor="img">
                 Insertar imagen
             </label>
-            
-            <input id="img" type="file" className="botonA"  accept="image/png, image/jpeg, image/jpg" onChange={(e)=>setData(e.target.files)} />
+
+            <input id="img" type="file" className="botonA" accept="image/png, image/jpeg, image/jpg" onChange={(e) => setData(e.target.files)} />
 
             <button className="botonR" onClick={validacion}>
                 Registrar
@@ -139,6 +138,6 @@ function Form() {
 
 
     </div>
-    
+
 }
 export default Form;
