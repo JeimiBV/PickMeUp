@@ -19,6 +19,9 @@ function Form() {
 
     const validacion = () => {
         if ((nombre.valor.length >= 2 && nombre.valor.length <= 30) && (descripcion.valor.length >= 10 && descripcion.valor.length <= 100) && (producto.valor !== "seleccione el tipo")) {
+            setNombre((prevState) => ({ ...prevState, estado: false }));
+            setDescripcion((prevState) => ({ ...prevState, estado: false }));
+            setProducto((prevState) => ({ ...prevState, estado: false }));
             setModalConf(true);
         } else {
             if ((nombre.valor.length >= 2 && nombre.valor.length <= 30)) {
