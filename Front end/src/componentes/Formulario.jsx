@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+
 import Modals from "./Modals";
 import "../estilos/formulario.css"
 import { useState } from 'react'
@@ -62,18 +63,19 @@ function Form() {
     return <div className="contenedor">
 
 
-        <div className="elementos-form">
+        <form action="http://localhost:5000/pruebafirebase-30018/us-central1/app/api/products" method="POST" className="elementos-form" >
+        
             <label className="label">
                 Nombre del producto
             </label>
-            <input className="entrada" placeholder="Ingrese el nombre" onChange={ev => (setNombre(prevState => ({ ...prevState, valor: ev.target.value })))}></input>
+            <input className="entrada" name="Nombre" placeholder="Ingrese el nombre" onChange={ev => (setNombre(prevState => ({ ...prevState, valor: ev.target.value })))}></input>
             <h3 className={nombre.estado ? "validacion" : "invisible"} >
                 El nombre debe contener de 2 a 30 caracteres
             </h3>
             <label className="label">
                 Descripción del producto
             </label>
-            <input className="entrada" placeholder="Ingrese la descripción" onChange={ev => (setDescripcion(prevState => ({ ...prevState, valor: ev.target.value })))}></input>
+            <input className="entrada" name="Descripcion" placeholder="Ingrese la descripción" onChange={ev => (setDescripcion(prevState => ({ ...prevState, valor: ev.target.value })))}></input>
             <h3 className={descripcion.estado ? "validacion" : "invisible"}>
                 La descripción debe contener de 10 a 100 caracteres
             </h3>
@@ -105,9 +107,7 @@ function Form() {
                 Registrar
             </button>
 
-
-
-        </div>
+        </form>
         <Modals
             estado={modalConf}
             cambiarEstado={setModalConf}
