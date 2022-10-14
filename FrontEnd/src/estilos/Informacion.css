@@ -1,0 +1,68 @@
+.todo{
+    position:absolute;
+    right:0%;
+    left:20%;
+    top:10%;
+    bottom: 0%;
+    border: solid black;
+    width: 1180px;
+    height: 676px;
+    background-color:gray;
+    
+    
+}
+
+.titulo{
+    text-align:center ;
+    top:5%;
+}
+
+.Informacion{
+    position: relative;
+    padding-top: 5%;
+    padding-left: 5%;
+    right:0%;
+    left:15%;
+    top:5%;
+    bottom: 0%;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    background-color: azure;
+    width: 850px;
+    height: 500px;
+    border-color: black;
+    border-style: solid;
+
+    
+}
+
+
+.desytip{
+
+    left:5%;
+    top: 10%;
+}
+
+
+.cerrar{
+    position: relative;
+    left:25%;
+    top: 10%;
+    cursor: pointer;
+    font-size: 25px;
+    max-width: 90px;
+    border-color:black;
+    background-color: lightcyan;
+    padding:5px
+}
+
+.pique{
+    position: relative;
+    width: 420px;
+    left:55%;
+    top:-64%;
+}
+
+.imagen{
+    width: 1000px;
+    height: 1000px;
+}
