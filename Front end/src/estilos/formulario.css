@@ -19,12 +19,17 @@
     display: flex;
     flex-direction: column;
     background-color: azure;
-    border-radius: 20px;    
+    border-radius: 20px; 
+    justify-content: center;   
 }
 .label{ 
     padding-top: .5%;
     padding-bottom: 0.3%;
     padding-left: 1.5%;
+    display: flex;
+    flex-direction: column;
+    
+
 }
 .botonA{
     height: 30px;
@@ -39,7 +44,7 @@
     height: 40px;
     margin-left: 1.5%;
     min-width: 10%;
-    margin: 5% auto;
+    margin: 2% auto;
     background-color: gray;
     transition: .5s;
     cursor: pointer;
@@ -55,6 +60,10 @@
     margin-left: 1.5%; 
     margin-right: 3.5%;
     padding-left: 2%;
+    width: 45vw;
+    position: relative;
+    left: -15px;
+    
 }
 .drop{
     background-color: white;
@@ -62,6 +71,9 @@
     margin-left: 1.5%;
     margin-right: 3.5%; 
     padding-left: 2%;
+    width: 45vw;
+    position: relative;
+    left: -15px;
 }
 .mensaje{
     width: 20vw;
@@ -132,4 +144,17 @@
     flex-direction: column;
     border-radius: 20px;
     color: white;
+}
+.icono{
+    display: flex;
+    width: 100%;
+}
+.fa-circle-check{
+    height: 2vh;
+    width: 12px;
+    color: rgb(126, 197, 126);
+}
+.imagenes-label{
+    position: relative;
+    left: 15px;
 }

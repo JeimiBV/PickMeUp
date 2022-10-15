@@ -8,15 +8,46 @@ import { useState } from 'react'
 
 function Form() {
 
-    const [nombre, setNombre] = useState({ valor: '', estado: false })
-    const [descripcion, setDescripcion] = useState({ valor: '', estado: false })
-    const [archivo, setArchivo] = useState({ valor: '', estado: false })
+    const [nombre, setNombre] = useState({ valor: '', estado: false,check:false })
+    const [descripcion, setDescripcion] = useState({ valor: '', estado: false, check:false })
+    const [archivo, setArchivo] = useState({ valor: '', estado: false, check:false })
     const [modalConf, setModalConf] = useState(false)
     const [modalSi, setModalSi] = useState(false)
     const [modalNo, setModalNo] = useState(false)
     const [data, setData] = useState();
     const opciones = ["Alimentos enlatados", "Bebidas calientes", "Carnes y pescado", "Cereales", "Ensalada", "Frutas y verduras", "Lácteos y huevos", "Panadería y pastelería", "Postres", "Snacks"];
     const [producto, setProducto] = useState({ valor: 'seleccione el tipo', estado: false });
+    
+    const checkNombre= (ev)=>{
+        setNombre(prevState => ({ ...prevState, valor: ev.target.value }))
+        
+        if(ev.target.value.length>=2 && ev.target.value.length<=10){
+            setNombre(prevState => ({ ...prevState, check:true }))
+           
+        }
+        else{
+            setNombre(prevState => ({ ...prevState, check:false }))
+        }
+
+    }
+    const checkDescripcion=(ev)=>{
+        setDescripcion(prevState => ({ ...prevState, valor: ev.target.value }))
+        if(ev.target.value.length>=10 && ev.target.value.length<=100){
+            setDescripcion(prevState => ({ ...prevState, check:true }))
+   
+        }
+        else{
+            setDescripcion(prevState => ({ ...prevState, check:false }))
+        }
+    }
+    const checkProducto =()=>{
+        if ((producto.valor !== "seleccione el tipo")) {
+                setProducto((prevState) => ({ ...prevState, check: true }))
+        }
+        else{
+            setProducto(prevState => ({ ...prevState, check:false }))
+        }
+    }
 
     const validacion = () => {
         if ((nombre.valor.length >= 2 && nombre.valor.length <= 30) && (descripcion.valor.length >= 10 && descripcion.valor.length <= 100) && (producto.valor !== "seleccione el tipo")) {
@@ -58,33 +89,42 @@ function Form() {
         setModalNo(true);
     }
 
-
+    //http://localhost:5000/pruebafirebase-30018/us-central1/app/api/products
 
     return <div className="contenedor">
 
 
-        <form action="http://localhost:5000/pruebafirebase-30018/us-central1/app/api/products" method="POST" className="elementos-form" >
+        <div action="" method="POST" className="elementos-form" >
         
             <label className="label">
                 Nombre del producto
-            </label>
-            <input className="entrada" name="Nombre" placeholder="Ingrese el nombre" onChange={ev => (setNombre(prevState => ({ ...prevState, valor: ev.target.value })))}></input>
+            <div className="icono">
+            <input className="entrada" name="Nombre" placeholder="Ingrese el nombre" onChange={ev => checkNombre(ev) }></input>
+            <i class={ nombre.check?"fa-regular fa-circle-check fa-2x":"transparent"}></i>
+            </div>
             <h3 className={nombre.estado ? "validacion" : "invisible"} >
                 El nombre debe contener de 2 a 30 caracteres
             </h3>
+            </label>
             <label className="label">
                 Descripción del producto
-            </label>
-            <input className="entrada" name="Descripcion" placeholder="Ingrese la descripción" onChange={ev => (setDescripcion(prevState => ({ ...prevState, valor: ev.target.value })))}></input>
+            <div className="icono">
+            <input className="entrada" name="Descripcion" placeholder="Ingrese la descripción" onChange={ev => checkDescripcion(ev)}></input>
+            <i class={ descripcion.check?"fa-regular fa-circle-check fa-2x":"transparent"}></i>
+            </div>
             <h3 className={descripcion.estado ? "validacion" : "invisible"}>
                 La descripción debe contener de 10 a 100 caracteres
             </h3>
+            </label>
 
             <label className="label">
                 Tipo de producto
-            </label>
+            <div className="icono">
             <select className="drop" placeholder="Seleccione el tipo"
                 defaultValue="seleccione el tipo"
+                onClick={
+                    checkProducto
+                }
                 onChange={
                     e => setProducto(prevState => ({ ...prevState, valor: e.target.value }))}>
                 <option value="seleccione el tipo" disabled hidden>Seleccione el tipo</option>
@@ -94,10 +134,13 @@ function Form() {
                     </option>
                 ))}
             </select>
+            <i class={producto.check ? "fa-regular fa-circle-check fa-2x" : "transparent"}></i>
+            </div>
             <h3 className={producto.estado ? "validacion" : "invisible"}>
                 Se debe seleccionar una opción
             </h3>
-            <label htmlFor="img">
+            </label>
+            <label htmlFor="img" className="imagenes-label">
                 Insertar imagen
             </label>
 
@@ -107,7 +150,7 @@ function Form() {
                 Registrar
             </button>
 
-        </form>
+        </div>
         <Modals
             estado={modalConf}
             cambiarEstado={setModalConf}
