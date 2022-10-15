@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-
+import {app} from "../fb"
 import Modals from "./Modals";
 import "../estilos/formulario.css"
 import { useState } from 'react'
@@ -7,6 +7,7 @@ import { useState } from 'react'
 
 
 function Form() {
+    
 
     const [nombre, setNombre] = useState({ valor: '', estado: false,check:false })
     const [descripcion, setDescripcion] = useState({ valor: '', estado: false, check:false })
@@ -18,6 +19,13 @@ function Form() {
     const opciones = ["Alimentos enlatados", "Bebidas calientes", "Carnes y pescado", "Cereales", "Ensalada", "Frutas y verduras", "Lácteos y huevos", "Panadería y pastelería", "Postres", "Snacks"];
     const [producto, setProducto] = useState({ valor: 'seleccione el tipo', estado: false });
     
+    const archivoHandler= async(e)=>{
+        const archivo = e.target.files[0]
+        const storageRef = app.storage().ref()
+        const archivoPath = storageRef.child(archivo.name)
+        await archivoPath.put(archivo)
+        console.log("archivo cargado: ", archivo.name)
+    }
     const checkNombre= (ev)=>{
         setNombre(prevState => ({ ...prevState, valor: ev.target.value }))
         
@@ -94,7 +102,7 @@ function Form() {
     return <div className="contenedor">
 
 
-        <div action="" method="POST" className="elementos-form" >
+        <form action="http://localhost:5000/fir-crud-c44e7/us-central1/app/api/products" method="POST" className="elementos-form" >
         
             <label className="label">
                 Nombre del producto
@@ -144,13 +152,14 @@ function Form() {
                 Insertar imagen
             </label>
 
-            <input id="img" type="file" className="botonA" accept="image/png, image/jpeg, image/jpg" onChange={(e) => setData(e.target.files)} />
+            <input id="img" type="file" className="botonA" accept="image/png, image/jpeg, image/jpg" onChange ={ e => archivoHandler(e)}  />
+
 
             <button className="botonR" onClick={validacion}>
                 Registrar
             </button>
 
-        </div>
+        </form>
         <Modals
             estado={modalConf}
             cambiarEstado={setModalConf}
@@ -190,3 +199,8 @@ function Form() {
 
 }
 export default Form;
+
+/*
+onChange={(e) => setData(e.target.files)}
+en input de tipo files
+*/
