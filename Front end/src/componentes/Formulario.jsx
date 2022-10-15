@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import {app} from "../fb"
+//import {app} from "../fb"
 import Modals from "./Modals";
 import "../estilos/formulario.css"
 import { useState } from 'react'
@@ -19,13 +19,13 @@ function Form() {
     const opciones = ["Alimentos enlatados", "Bebidas calientes", "Carnes y pescado", "Cereales", "Ensalada", "Frutas y verduras", "Lácteos y huevos", "Panadería y pastelería", "Postres", "Snacks"];
     const [producto, setProducto] = useState({ valor: 'seleccione el tipo', estado: false });
     
-    const archivoHandler= async(e)=>{
+  /*  const archivoHandler= async(e)=>{
         const archivo = e.target.files[0]
         const storageRef = app.storage().ref()
         const archivoPath = storageRef.child(archivo.name)
         await archivoPath.put(archivo)
         console.log("archivo cargado: ", archivo.name)
-    }
+    }*/
     const checkNombre= (ev)=>{
         setNombre(prevState => ({ ...prevState, valor: ev.target.value }))
         
@@ -152,7 +152,7 @@ function Form() {
                 Insertar imagen
             </label>
 
-            <input id="img" type="file" className="botonA" accept="image/png, image/jpeg, image/jpg" onChange ={ e => archivoHandler(e)}  />
+            <input id="img" type="file" className="botonA" accept="image/png, image/jpeg, image/jpg"  onChange={(e) => setData(e.target.files)} />
 
 
             <button className="botonR" onClick={validacion}>
@@ -201,6 +201,6 @@ function Form() {
 export default Form;
 
 /*
-onChange={(e) => setData(e.target.files)}
+onChange ={ e => archivoHandler(e)}
 en input de tipo files
 */
