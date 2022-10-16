@@ -60,17 +60,17 @@ function Form() {
 
     const validacion = () => {
         event.preventDefault()
-        if ((nombre.valor.length >= 2 && nombre.valor.length <= 30) && (descripcion.valor.length >= 10 && descripcion.valor.length <= 100) && (producto.valor !== "seleccione el tipo")) {
+        if ((nombre.valor.length >= 2 && nombre.valor.length <= 30) && (descripcion.valor.length >= 10 && descripcion.valor.length <= 100) && (producto.valor !== "seleccione el tipo")&& validacionEspacios(nombre.valor) && validacionEspacios(descripcion.valor)) {
             setNombre((prevState) => ({ ...prevState, estado: false }));
             setDescripcion((prevState) => ({ ...prevState, estado: false }));
             setProducto((prevState) => ({ ...prevState, estado: false }));
             setModalConf(true);
         } else {
-            if ((nombre.valor.length >= 2 && nombre.valor.length <= 30)) {
+            if ((nombre.valor.length >= 2 && nombre.valor.length <= 30) && validacionEspacios(nombre.valor)) {
                 setNombre((prevState) => ({ ...prevState, estado: false }));
             } else {
                 setNombre(prevState => ({ ...prevState, estado: true }))
-            } if ((descripcion.valor.length >= 10 && descripcion.valor.length <= 100)) {
+            } if ((descripcion.valor.length >= 10 && descripcion.valor.length <= 100) && validacionEspacios(descripcion.valor)) {
                 setDescripcion((prevState) => ({ ...prevState, estado: false }))
             } else {
                 setDescripcion(prevState => ({ ...prevState, estado: true }))
@@ -83,6 +83,15 @@ function Form() {
         
     }
 
+    const validacionEspacios = (parametro) => {
+        var patron = /^\s+$/;
+        if(patron.test(parametro)){
+            return false;
+        } else{
+            return true;
+        }
+    }
+    
     const mostrarSi = () => {
         setTimeout(() => {
             setModalNo(false)
