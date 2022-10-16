@@ -55,9 +55,11 @@ function Form() {
         else{
             setProducto(prevState => ({ ...prevState, check:false }))
         }
+       
     }
 
     const validacion = () => {
+        event.preventDefault()
         if ((nombre.valor.length >= 2 && nombre.valor.length <= 30) && (descripcion.valor.length >= 10 && descripcion.valor.length <= 100) && (producto.valor !== "seleccione el tipo")) {
             setNombre((prevState) => ({ ...prevState, estado: false }));
             setDescripcion((prevState) => ({ ...prevState, estado: false }));
@@ -78,6 +80,7 @@ function Form() {
                 setProducto((prevState) => ({ ...prevState, estado: true }))
             }
         }
+        
     }
 
     const mostrarSi = () => {
@@ -85,9 +88,16 @@ function Form() {
             setModalNo(false)
             setModalSi(false)
         }, 3000);
+        document.getElementById('Formul').reset();
         setModalConf(false);
         setModalSi(true);
+        setNombre(prevState => ({ ...prevState, valor: '' }))
+        setDescripcion(prevState => ({ ...prevState, valor: '' }));
+        setProducto(prevState => ({ ...prevState, valor: 'seleccione el tipo' }));
     }
+
+        
+   
     const mostrarNo = () => {
         setTimeout(() => {
             setModalNo(false)
@@ -96,13 +106,14 @@ function Form() {
         setModalConf(false);
         setModalNo(true);
     }
+   
 
     //http://localhost:5000/pruebafirebase-30018/us-central1/app/api/products
 
     return <div className="contenedor">
 
 
-        <form action="http://localhost:5000/fir-crud-c44e7/us-central1/app/api/products" method="POST" className="elementos-form" >
+        <form action="" id= "Formul" onSubmit= {validacion} method="POST" className="elementos-form" >
         
             <label className="label">
                 Nombre del producto
@@ -155,9 +166,10 @@ function Form() {
             <input id="img" type="file" className="botonA" accept="image/png, image/jpeg, image/jpg"  onChange={(e) => setData(e.target.files)} />
 
 
-            <button className="botonR" onClick={validacion}>
-                Registrar
-            </button>
+            <input type="submit" className="botonR" value='Registrar'>
+            </input>
+              
+           
 
         </form>
         <Modals
